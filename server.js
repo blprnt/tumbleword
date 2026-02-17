@@ -2,6 +2,7 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var fs = require("fs");
+var path = require("path");
 var app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -114,6 +115,16 @@ function buildScoreResponse(word) {
 
 // Static files
 app.use(express.static("views"));
+
+// Serve p5.js from npm package
+app.get("/p5.js", (req, res) => {
+  res.sendFile(path.join(__dirname, "node_modules/p5/lib/p5.js"));
+});
+
+// p5.dom.js functionality is included in p5.js 1.x
+app.get("/p5.dom.js", (req, res) => {
+  res.type("application/javascript").send("");
+});
 
 // GET /daily — today's word
 app.get("/daily", (req, res) => {
