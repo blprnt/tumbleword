@@ -535,7 +535,7 @@ function toClipBoard(_msg) {
 }
 
 function suggestDone() {
-  document.querySelector("#done").classList.remove("gone");
+  document.querySelector("#done").style.visibility = "visible";
 }
 
 function getWord() {
@@ -688,9 +688,9 @@ function setSteps() {
   document.querySelector("#steps").innerHTML = max(0, stepsLeft);
 
   if (stepsLeft < 4) {
-    document.querySelector("#done").classList.remove("gone");
+    document.querySelector("#done").style.visibility = "visible";
   } else {
-    document.querySelector("#done").classList.add("gone");
+    document.querySelector("#done").style.visibility = "hidden";
   }
   if (stepsLeft <= cutCost) {
     document.querySelector("#cuts").classList.add("gone");

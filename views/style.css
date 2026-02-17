@@ -1024,6 +1024,10 @@ fieldset .btn {
   padding-top:10px;
 }
 
+#done {
+  visibility: hidden;
+}
+
 #highScoreLabel {
   display:block;
   position:absolute;
