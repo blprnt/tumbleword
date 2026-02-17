@@ -293,34 +293,27 @@ function buildWord(_word, _slide, _noChange) {
 
 //Yesterday
 function rememberYesterday() {
-  
-  let yesterdayString = "thrice=88:brewer|brawer|drawer|braver|braves|craves|craver|drawer|brayer|draws|craws|braws|drays|craws|drays"
-      //"muffin=120:hooted|horsed|hosted|hotted|jotted|lotted|louted|loused|moused|mossed|pouted|potted|posted|ported|sorted|sotted|totted|touted|toused|toured"
-      //"dogleg=156:doiled|coiled|boiled|coined|brined|daring|caring|baring|basing|bating|dating|eating|easing|earing|faring|fating|gating|hating|having|hawing|haying|hazing|gazing|fazing|faying|faxing"
-      //"fledge=132:fleche|leched|necked|pecked|peeked|peeled|reeled|reeked|seeled|seemed|teemed|teamed|seamed|reamed|reaped|reared|seared|teared|teased|teated|seated|reaved"
-  let yesterdaySeed = yesterdayString.split("=")[0];
-  let yesterdayScore = yesterdayString.split(":")[0].split("=")[1];
-  let yesterdayList = yesterdayString.split(":")[1].split("|");
+  fetch("/yesterday")
+    .then((res) => res.json())
+    .then(({ word, score, path }) => {
+      if (!document.querySelector("#yesterday")) return;
+      const container = document.querySelector("#yesterdayScores");
 
-  console.log("YESTERDAY LIST");
-  console.log(yesterdayList);
+      const pts = document.createElement("div");
+      pts.innerHTML = "🎉" + score + " points! 🎉";
+      container.appendChild(pts);
 
-  if (document.querySelector("#yesterday")) {
-    let pts = document.createElement("div");
-    pts.innerHTML = "🎉" + yesterdayScore + " points! 🎉";
-    document.querySelector("#yesterdayScores").appendChild(pts);
+      const sd = document.createElement("div");
+      sd.innerHTML = word;
+      sd.classList.add("ySeed");
+      container.appendChild(sd);
 
-    let sd = document.createElement("div");
-    sd.innerHTML = yesterdaySeed;
-    sd.classList.add("ySeed");
-    document.querySelector("#yesterdayScores").appendChild(sd);
-
-    for (let i = 0; i < yesterdayList.length; i++) {
-      let w = document.createElement("div");
-      w.innerHTML = yesterdayList[i];
-      document.querySelector("#yesterdayScores").appendChild(w);
-    }
-  }
+      path.forEach((w) => {
+        const el = document.createElement("div");
+        el.innerHTML = w;
+        container.appendChild(el);
+      });
+    });
 }
 
 //Messaging

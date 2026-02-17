@@ -26,13 +26,22 @@ function getTodayStr() {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
 }
 
-function getDailyWord() {
-  const dateStr = getTodayStr();
+function getWordForDate(dateStr) {
   let hash = 0;
   for (let i = 0; i < dateStr.length; i++) {
     hash = (Math.imul(31, hash) + dateStr.charCodeAt(i)) | 0;
   }
   return dailyWords[Math.abs(hash) % dailyWords.length];
+}
+
+function getDailyWord() {
+  return getWordForDate(getTodayStr());
+}
+
+function getYesterdayStr() {
+  const d = new Date();
+  d.setDate(d.getDate() - 1);
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
 }
 
 let currentDateStr = getTodayStr();
@@ -110,6 +119,13 @@ app.use(express.static("views"));
 app.get("/daily", (req, res) => {
   checkDayRollover();
   res.json({ word: getDailyWord() });
+});
+
+// GET /yesterday — previous day's word and high score path
+app.get("/yesterday", (req, res) => {
+  const word = getWordForDate(getYesterdayStr());
+  const { score, path } = getHighScore(word);
+  res.json({ word, score, path: path ? path.split("|") : [] });
 });
 
 // GET /score?word=... — fetch current score data without submitting
