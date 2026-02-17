@@ -454,7 +454,7 @@ Tumbleword: ` +
     ` ✂️ \n` +
     bumpTotal +
     ` 🤜🤛 \n` +
-    `https://tumbleword.glitch.me?word=` +
+    `https://tumbleword.com?word=` +
     seedWord;
   toClipBoard(shareMsg);
 }
@@ -470,7 +470,7 @@ function challengeClipBoard() {
 
 Think you can do better? Give it a try:
 
-https://tumbleword.glitch.me?word=` +
+https://tumbleword.com?word=` +
     seedWord +
     `&challenge=` +
     playerScore;
