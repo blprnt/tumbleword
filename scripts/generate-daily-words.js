@@ -8,7 +8,7 @@ const words = fs
   .readFileSync(path.join(__dirname, "../views/wordlist_en.txt"), "utf8")
   .split("\n")
   .map((w) => w.trim().toLowerCase())
-  .filter((w) => w.length === 6 && /^[a-z]+$/.test(w));
+  .filter((w) => w.length === 6 && /^[a-z]+$/.test(w) && !/(.)\1/.test(w));
 
 const outPath = path.join(__dirname, "../data/daily-words.txt");
 fs.writeFileSync(outPath, words.join("\n"));
