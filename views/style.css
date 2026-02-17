@@ -441,7 +441,7 @@ BEGIN GAME CODE
 #message {
   color:#8F1D00;
   display:block;
-  height:24px;
+  min-height:24px;
   width:auto;
   font-size:20pt;
   font-family: "Avenir", Helvetica, sans-serif;
