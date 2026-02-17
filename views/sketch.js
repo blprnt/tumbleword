@@ -258,6 +258,44 @@ function setup() {
       });
   }
   setMessage("scroll or drag the letters up and down to find new words!");
+
+  initIntro();
+}
+
+function initIntro() {
+  if (localStorage.getItem("tumbleword-seen")) return;
+
+  const intro = document.querySelector("#intro");
+  const steps = Array.from(document.querySelectorAll(".introStep"));
+  const prevBtn = document.querySelector("#introPrev");
+  const nextBtn = document.querySelector("#introNext");
+  let current = 0;
+
+  function showStep(n) {
+    steps.forEach((s, i) => s.classList.toggle("active", i === n));
+    prevBtn.style.visibility = n === 0 ? "hidden" : "visible";
+    nextBtn.textContent = n === steps.length - 1 ? "let's play!" : "next →";
+  }
+
+  nextBtn.addEventListener("click", function () {
+    if (current < steps.length - 1) {
+      current++;
+      showStep(current);
+    } else {
+      localStorage.setItem("tumbleword-seen", "1");
+      intro.style.display = "none";
+    }
+  });
+
+  prevBtn.addEventListener("click", function () {
+    if (current > 0) {
+      current--;
+      showStep(current);
+    }
+  });
+
+  showStep(0);
+  intro.style.display = "flex";
 }
 
 let spinner;
