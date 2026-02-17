@@ -108,7 +108,7 @@ function setup() {
     highScore = challengeScore;
     document.querySelector("#highLabel").innerHTML = "challenge";
   } else {
-    reportScore(0);
+    fetchScoreData();
   }
 
   //populate yesterdays's score
@@ -1028,49 +1028,52 @@ function enableScroll(_event) {
   document.querySelector("body").style.overflow = "scroll";
 }
 
-//Score tracking stuff
-function reportScore(_score) {
-  let human = document.querySelector("#isHuman").checked;
+// Apply a score response object to the game state
+function applyScoreData(scoreObj) {
+  if (scoreObj.score > highScore && !challenge) {
+    highScore = scoreObj.score;
+    goodScore = scoreObj.avg;
+    awesomeScore = scoreObj.good;
+    displayHigh = goodScore;
+    setScore();
+  }
+  if (scoreObj.avg) {
+    const clampedAvg = min(scoreObj.avg, highScore / 2);
+    if (document.querySelector("#medianLabel")) {
+      document.querySelector("#medianBack").style.width =
+        (clampedAvg / highScore + 0.05) * 100 + "%";
+      document.querySelector("#medianLabel").style.left =
+        (clampedAvg / highScore + 0.05) * 100 + "%";
+    } else {
+      document.querySelector("#avgLabel").innerHTML = "average ";
+      document.querySelector("#avg").style.left =
+        (clampedAvg / highScore) * 100 + "%";
+    }
+  }
+}
 
+// Fetch current score data for today's word at game start
+function fetchScoreData() {
+  fetch("/score?word=" + encodeURIComponent(seedWord))
+    .then((res) => res.json())
+    .then((scoreObj) => applyScoreData(scoreObj));
+}
+
+// Submit a completed game score
+function reportScore(_score) {
   let data = {
     word: seedWord,
     score: _score,
-    isHuman: human,
+    isHuman: document.querySelector("#isHuman").checked,
     wordPath: doneWords.join("|"),
   };
   fetch("/score", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
-  }).then((res) => {
-    let scoreObj = res.json().then((scoreObj) => {
-      console.log(scoreObj);
-      console.log("Request complete! response:", scoreObj.score);
-      if (scoreObj.score > highScore && !challenge) {
-        highScore = scoreObj.score;
-        displayHigh = scoreObj.avg;
-        goodScore = scoreObj.avg;
-        awesomeScore = scoreObj.good;
-        setScore();
-      }
-      if (scoreObj.avg) {
-        console.log("Average:" + scoreObj.avg);
-
-        if (scoreObj.avg > highScore) scoreObj.avg = highScore / 2;
-        if (document.querySelector("#medianLabel")) {
-          document.querySelector("#medianBack").style.width =
-            (scoreObj.avg / highScore + 0.05) * 100 + "%";
-          document.querySelector("#medianLabel").style.left =
-            (scoreObj.avg / highScore + 0.05) * 100 + "%";
-        } else {
-          document.querySelector("#avgLabel").innerHTML = "average "; // + scoreObj.avg;
-          document.querySelector("#avg").style.left =
-            (scoreObj.avg / highScore) * 100 + "%";
-          console.log((scoreObj.avg / highScore) * 100 + "%");
-        }
-      }
-    });
-  });
+  })
+    .then((res) => res.json())
+    .then((scoreObj) => applyScoreData(scoreObj));
 }
 
 function bump(_right) {

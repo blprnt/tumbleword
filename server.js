@@ -1,8 +1,4 @@
-
 // server.js
-// where your node app starts
-
-// init project
 var express = require("express");
 var bodyParser = require("body-parser");
 var fs = require("fs");
@@ -11,13 +7,11 @@ var app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-let reporting = false;
-let median = 15;
-
-//Score logic. Scores are stored in a really simple txt file
-//word=score
+// High scores: word -> "score:path"
 let scores = {};
-let machinceScores = {};
+
+// Today's submitted scores, kept in memory and synced to data/today.txt
+let todayScores = [];
 
 // Daily word system
 let dailyWords = fs
@@ -47,105 +41,113 @@ function checkDayRollover() {
   const todayStr = getTodayStr();
   if (todayStr !== currentDateStr) {
     currentDateStr = todayStr;
-    fs.writeFileSync("data/today.txt", "");
-    console.log(`New day: ${todayStr}. Reset today.txt. Word: ${getDailyWord()}`);
+    todayScores = [];
+    fs.writeFile("data/today.txt", "", (err) => {
+      if (err) console.error("Error resetting today.txt:", err);
+    });
+    console.log(`New day: ${todayStr}. Word: ${getDailyWord()}`);
   }
 }
 
 function loadScores() {
-  //human
-  var array = fs.readFileSync("data/scores.txt").toString().split("\n");
-  array.forEach((w) => {
-    scores[w.split("=")[0]] = w.split("=")[1];
-  });
-  //machines
-  array = fs.readFileSync("data/machines.txt").toString().split("\n");
-  array.forEach((w) => {
-    scores[w.split("=")[0]] = w.split("=")[1];
-  });
-  
+  fs.readFileSync("data/scores.txt")
+    .toString()
+    .split("\n")
+    .forEach((line) => {
+      const eq = line.indexOf("=");
+      if (eq > 0) scores[line.slice(0, eq)] = line.slice(eq + 1);
+    });
 }
 
-function getScore(_w) {
-  let _sc;
-  if (!scores[_w]) {
-    setScore(_w, 30);
-  }
-  _sc = scores[_w];
-
-  return ({word:_w, score:_sc.split(":")[0], avg:getMedian(), good:getPercentile(0.80)});
-}
-
-function setScore(_w, _score, _path) {
-  scores[_w] = _score + ":" + _path;
-  writeScores();
+function loadTodayScores() {
+  const raw = fs.readFileSync("data/today.txt").toString();
+  todayScores = raw
+    .split(",")
+    .map(Number)
+    .filter((n) => n > 0 && !isNaN(n));
 }
 
 function writeScores() {
-  console.log("WRITE SCORES");
-  var file = fs.createWriteStream("data/scores.txt");
-  file.on("error", function (err) {
-    console.log(err);
+  const lines = Object.entries(scores)
+    .map(([w, v]) => `${w}=${v}`)
+    .join("\n");
+  fs.writeFile("data/scores.txt", lines, (err) => {
+    if (err) console.error("Error writing scores:", err);
   });
-  for (var n in scores) {
-    file.write(n + "=" + scores[n] + "\n");
-  }
-  file.end();
- 
 }
 
-function getMedian() {
-  var nums = fs.readFileSync("data/today.txt").toString().split(",");
-  nums.sort(function(a, b){return a - b});
-  console.log(nums);
-  let md = nums[Math.floor(nums.length/2)];
-  console.log("MEDIAN:" + md);
-  return(md);
+function getHighScore(word) {
+  const raw = scores[word];
+  if (!raw) return { score: 0, path: "" };
+  const colon = raw.indexOf(":");
+  return {
+    score: parseInt(raw.slice(0, colon > 0 ? colon : undefined), 10) || 0,
+    path: colon > 0 ? raw.slice(colon + 1) : "",
+  };
 }
 
-function getPercentile(_p) {
-  var nums = fs.readFileSync("data/today.txt").toString().split(",");
-  nums.sort(function(a, b){return a - b});
-  let md = nums[Math.floor(nums.length * _p)];
-  console.log("PERCENTILE " + _p + ":" + md);
-  return(md);
+function getPercentile(p) {
+  if (todayScores.length === 0) return 0;
+  const sorted = [...todayScores].sort((a, b) => a - b);
+  return sorted[Math.floor(sorted.length * p)] || 0;
 }
 
-// http://expressjs.com/en/starter/static-files.html
+function buildScoreResponse(word) {
+  const { score, path } = getHighScore(word);
+  return {
+    word,
+    score,
+    path,
+    avg: getPercentile(0.5),
+    good: getPercentile(0.8),
+  };
+}
+
+// Static files
 app.use(express.static("views"));
 
-// Daily word endpoint
+// GET /daily — today's word
 app.get("/daily", (req, res) => {
   checkDayRollover();
   res.json({ word: getDailyWord() });
 });
 
-//Post endpoint for scores
-app.post("/score", (req, res) => {
+// GET /score?word=... — fetch current score data without submitting
+app.get("/score", (req, res) => {
   checkDayRollover();
-  if (reporting) console.log("SCORE REPORT:" + req.body.word + ":" + req.body.score + ":" + req.body.wordPath);
-  let _score = getScore(req.body.word).score;
-  if (reporting) console.log("STORED SCORE:" + _score);
-  if (req.body.score > _score) {
-    if (reporting) console.log("HIGH SCORE!");
-    setScore(req.body.word, req.body.score, req.body.wordPath);
-  }
-  if (req.body.score > 0) {
-    if (reporting) console.log("APPEND SCORE:" + req.body.score);
-    fs.appendFile( "data/today.txt", req.body.score + ",");
-    if (reporting) console.log("IS HUMAN:" + req.body.isHuman);
-  }
-
-  res.send(JSON.stringify(getScore(req.body.word)));
+  const word = req.query.word;
+  if (!word) return res.status(400).json({ error: "word required" });
+  res.json(buildScoreResponse(word));
 });
 
-// listen for requests :)
-var listener = app.listen(process.env.PORT, function () {
-  console.log("Your app is listening on port " + listener.address().port);
+// POST /score — submit a completed game score
+app.post("/score", (req, res) => {
+  checkDayRollover();
+  const word = req.body.word;
+  const incoming = parseInt(req.body.score, 10);
+  const wordPath = req.body.wordPath || "";
+
+  if (incoming > 0) {
+    todayScores.push(incoming);
+    fs.appendFile("data/today.txt", incoming + ",", (err) => {
+      if (err) console.error("Error appending score:", err);
+    });
+  }
+
+  const current = getHighScore(word);
+  if (incoming > current.score) {
+    scores[word] = incoming + ":" + wordPath;
+    writeScores();
+  }
+
+  res.json(buildScoreResponse(word));
+});
+
+// Listen
+var listener = app.listen(process.env.PORT || 3000, function () {
+  console.log("Tumbleword listening on port " + listener.address().port);
 });
 
 loadScores();
-
-median = getMedian();
-
-console.log(getPercentile(0.76));
+loadTodayScores();
+console.log(`Daily word: ${getDailyWord()}`);
