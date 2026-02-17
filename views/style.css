@@ -1024,6 +1024,11 @@ fieldset .btn {
   padding-top:10px;
 }
 
+#doneRow {
+  text-align: center;
+  padding-top: 10px;
+}
+
 #done {
   visibility: hidden;
 }
