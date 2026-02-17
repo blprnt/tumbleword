@@ -1023,11 +1023,11 @@ function enableScroll(_event) {
 
 // Apply a score response object to the game state
 function applyScoreData(scoreObj) {
-  if (scoreObj.score > highScore && !challenge) {
-    highScore = scoreObj.score;
+  if (!challenge) {
+    if (scoreObj.score > 0) highScore = scoreObj.score;
     goodScore = scoreObj.avg;
     awesomeScore = scoreObj.good;
-    displayHigh = goodScore;
+    displayHigh = goodScore > 0 ? goodScore : highScore;
     setScore();
   }
   if (scoreObj.avg) {
