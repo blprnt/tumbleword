@@ -19,6 +19,39 @@ let median = 15;
 let scores = {};
 let machinceScores = {};
 
+// Daily word system
+let dailyWords = fs
+  .readFileSync("data/daily-words.txt")
+  .toString()
+  .trim()
+  .split("\n")
+  .filter((w) => w.trim());
+
+function getTodayStr() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
+
+function getDailyWord() {
+  const dateStr = getTodayStr();
+  let hash = 0;
+  for (let i = 0; i < dateStr.length; i++) {
+    hash = (Math.imul(31, hash) + dateStr.charCodeAt(i)) | 0;
+  }
+  return dailyWords[Math.abs(hash) % dailyWords.length];
+}
+
+let currentDateStr = getTodayStr();
+
+function checkDayRollover() {
+  const todayStr = getTodayStr();
+  if (todayStr !== currentDateStr) {
+    currentDateStr = todayStr;
+    fs.writeFileSync("data/today.txt", "");
+    console.log(`New day: ${todayStr}. Reset today.txt. Word: ${getDailyWord()}`);
+  }
+}
+
 function loadScores() {
   //human
   var array = fs.readFileSync("data/scores.txt").toString().split("\n");
@@ -81,8 +114,15 @@ function getPercentile(_p) {
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static("views"));
 
+// Daily word endpoint
+app.get("/daily", (req, res) => {
+  checkDayRollover();
+  res.json({ word: getDailyWord() });
+});
+
 //Post endpoint for scores
 app.post("/score", (req, res) => {
+  checkDayRollover();
   if (reporting) console.log("SCORE REPORT:" + req.body.word + ":" + req.body.score + ":" + req.body.wordPath);
   let _score = getScore(req.body.word).score;
   if (reporting) console.log("STORED SCORE:" + _score);

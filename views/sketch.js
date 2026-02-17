@@ -41,9 +41,9 @@ let scoreMessage = "this is the average score of all players today.";
 //Which score are we showing? Good, great, best
 let scoreStage = 0;
 
-//Set the seed word from the query string if it's there
-let seedWord =
-  queryWord && queryWord.length < 9 ? queryWord.toLowerCase() : "rancor";
+//Seed word — set in preload() from /daily or from query string
+let seedWord;
+let dailyData = {};
 
 let currentWord;
 let referenceWord;
@@ -88,7 +88,16 @@ if (
 let letterSize = isMobile ? 40 : 20;
 let driftMin = isMobile ? 60 : 5;
 
+function preload() {
+  if (queryWord && queryWord.length < 9) {
+    seedWord = queryWord.toLowerCase();
+  } else {
+    dailyData = loadJSON("/daily");
+  }
+}
+
 function setup() {
+  if (!seedWord) seedWord = dailyData.word || "rancor";
   tumbleSpin();
   //disable enter button
   document.querySelector("#enter").classList.add("disabled");
