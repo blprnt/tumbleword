@@ -1,0 +1,19 @@
+# Environment variables
+.env
+
+# Glitch-specific
+.glitchdotcom.json
+.glitch-assets
+glitch-assets/
+shrinkwrap.yaml
+
+# Shell history / editor state
+.bash_history
+.viminfo
+.config/
+
+# Node
+node_modules/
+
+# OS
+.DS_Store

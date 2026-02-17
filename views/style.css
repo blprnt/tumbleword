@@ -1,0 +1,1072 @@
+@import url('https://fonts.googleapis.com/css2?family=Martian+Mono:wght@200&display=swap');
+
+/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
+
+/* Document
+   ========================================================================== */
+
+/**
+ * 1. Correct the line height in all browsers.
+ * 2. Prevent adjustments of font size after orientation changes in iOS.
+ */
+
+html {
+  line-height: 1.15; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+}
+
+/* Sections
+   ========================================================================== */
+
+/**
+ * Remove the margin in all browsers.
+ */
+
+body {
+  margin: 0;
+  background-color:#F0E2D1;
+  background-attachment: fixed;
+  overflow-x:hidden;
+  /*background-image: linear-gradient(0deg, rgb(217, 175, 217) 0%, rgb(151, 217, 225) 33%, rgb(255, 255, 255) 66%, rgb(255, 255, 255) 100vh);
+` */
+}
+
+/**
+ * Render the `main` element consistently in IE.
+ */
+
+main {
+  display: block;
+}
+
+/**
+ * Correct the font size and margin on `h1` elements within `section` and
+ * `article` contexts in Chrome, Firefox, and Safari.
+ */
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+/* Grouping content
+   ========================================================================== */
+
+/**
+ * 1. Add the correct box sizing in Firefox.
+ * 2. Show the overflow in Edge and IE.
+ */
+
+hr {
+  box-sizing: content-box; /* 1 */
+  height: 0; /* 1 */
+  overflow: visible; /* 2 */
+}
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+
+pre {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+/* Text-level semantics
+   ========================================================================== */
+
+/**
+ * Remove the gray background on active links in IE 10.
+ */
+
+a {
+  background-color: transparent;
+}
+
+/**
+ * 1. Remove the bottom border in Chrome 57-
+ * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
+ */
+
+abbr[title] {
+  border-bottom: none; /* 1 */
+  text-decoration: underline; /* 2 */
+  text-decoration: underline dotted; /* 2 */
+}
+
+/**
+ * Add the correct font weight in Chrome, Edge, and Safari.
+ */
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+
+code,
+kbd,
+samp {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+/**
+ * Add the correct font size in all browsers.
+ */
+
+small {
+  font-size: 80%;
+}
+
+/**
+ * Prevent `sub` and `sup` elements from affecting the line height in
+ * all browsers.
+ */
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+/* Embedded content
+   ========================================================================== */
+
+/**
+ * Remove the border on images inside links in IE 10.
+ */
+
+img {
+  border-style: none;
+}
+
+/* Forms
+   ========================================================================== */
+
+/**
+ * 1. Change the font styles in all browsers.
+ * 2. Remove the margin in Firefox and Safari.
+ */
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit; /* 1 */
+  font-size: 100%; /* 1 */
+  line-height: 1.15; /* 1 */
+  margin: 0; /* 2 */
+}
+
+/**
+ * Show the overflow in IE.
+ * 1. Show the overflow in Edge.
+ */
+
+button,
+input {
+  /* 1 */
+  overflow: visible;
+}
+
+/**
+ * Remove the inheritance of text transform in Edge, Firefox, and IE.
+ * 1. Remove the inheritance of text transform in Firefox.
+ */
+
+button,
+select {
+  /* 1 */
+  text-transform: none;
+}
+
+/**
+ * Correct the inability to style clickable types in iOS and Safari.
+ */
+
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
+}
+
+/**
+ * Remove the inner border and padding in Firefox.
+ */
+
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+/**
+ * Restore the focus styles unset by the previous rule.
+ */
+
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+/**
+ * Correct the padding in Firefox.
+ */
+
+fieldset {
+  padding: 0.35em 0.75em 0.625em;
+}
+
+/**
+ * 1. Correct the text wrapping in Edge and IE.
+ * 2. Correct the color inheritance from `fieldset` elements in IE.
+ * 3. Remove the padding so developers are not caught out when they zero out
+ *    `fieldset` elements in all browsers.
+ */
+
+legend {
+  box-sizing: border-box; /* 1 */
+  color: inherit; /* 2 */
+  display: table; /* 1 */
+  max-width: 100%; /* 1 */
+  padding: 0; /* 3 */
+  white-space: normal; /* 1 */
+}
+
+/**
+ * Add the correct vertical alignment in Chrome, Firefox, and Opera.
+ */
+
+progress {
+  vertical-align: baseline;
+}
+
+/**
+ * Remove the default vertical scrollbar in IE 10+.
+ */
+
+textarea {
+  overflow: auto;
+}
+
+/**
+ * 1. Add the correct box sizing in IE 10.
+ * 2. Remove the padding in IE 10.
+ */
+
+[type="checkbox"],
+[type="radio"] {
+  box-sizing: border-box; /* 1 */
+  padding: 0; /* 2 */
+}
+
+/**
+ * Correct the cursor style of increment and decrement buttons in Chrome.
+ */
+
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/**
+ * 1. Correct the odd appearance in Chrome and Safari.
+ * 2. Correct the outline style in Safari.
+ */
+
+[type="search"] {
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
+}
+
+/**
+ * Remove the inner padding in Chrome and Safari on macOS.
+ */
+
+[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+ * 1. Correct the inability to style clickable types in iOS and Safari.
+ * 2. Change font properties to `inherit` in Safari.
+ */
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
+}
+
+/* Interactive
+   ========================================================================== */
+
+/*
+ * Add the correct display in Edge, IE 10+, and Firefox.
+ */
+
+details {
+  display: block;
+}
+
+/*
+ * Add the correct display in all browsers.
+ */
+
+summary {
+  display: list-item;
+}
+
+/* Misc
+   ========================================================================== */
+
+/**
+ * Add the correct display in IE 10+.
+ */
+
+template {
+  display: none;
+}
+
+/**
+ * Add the correct display in IE 10.
+ */
+
+[hidden] {
+  display: none;
+}
+
+/**
+
+BEGIN GAME CODE
+
+*/
+
+#wrap {
+  font-family: "Avenir", Helvetica, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width:100%;
+  
+}
+
+#game {
+  width: 100%;
+  min-width: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+@media only screen and (min-width: 768px) {
+  #game {
+    width: 60%;
+  }
+}
+
+#wordWrap {
+  width: 100vw;
+  height: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 5vh;
+}
+
+#shade {
+  width:100%;
+  height:100%;
+  background-color:rgba(255,0,0,0.3);
+  z-index:1;
+}
+
+#stepWrap {
+  display:flex;
+  align-items:center;
+}
+#steps {
+  font-family: "Avenir", Helvetica, sans-serif;
+  color:#DC6C3D;
+  font-size: 5em;
+  position: relative;
+  padding: 45px;
+  margin-top:5px;
+  margin-bottom:40px;
+  text-align:center;
+  background-image: url("https://cdn.glitch.global/fddfe4f6-ba40-4230-a637-350cbd5ad40f/tumbleweed_simple.svg?v=1670603043635");
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position:center;
+}
+
+.fillWeed {
+  color:white !important;
+  background-image: url("https://cdn.glitch.global/fddfe4f6-ba40-4230-a637-350cbd5ad40f/tumbleweed_fill.svg?v=1670963018347") !important;
+}
+
+.rotate {
+  animation-name: tumble;
+  animation-duration: 1s;
+}
+
+@media only screen and (min-width: 768px) {
+  #steps {
+    font-size: 3.5em;
+  }
+}
+
+#message {
+  color:#8F1D00;
+  display:block;
+  height:24px;
+  width:auto;
+  font-size:20pt;
+  font-family: "Avenir", Helvetica, sans-serif;
+  padding:10px;
+  margin:15px;
+  margin-bottom:20px;
+}
+
+#cuts {
+  font-size: 3em;
+  position: relative;
+  padding: 5px;
+  padding-left:14px;
+  color: grey;
+}
+
+/* Make the badge float in the top right corner of the button */
+.badge {
+  background-color: #E89BB0;
+  border-radius: 8px;
+  color: white;
+ 
+  padding: 5px;
+  font-size: 18px;
+  
+  position: absolute; /* Position the badge within the relatively positioned button */
+  top: calc(0% - 8px);
+  right: -10%;
+  
+  z-index:20;
+}
+
+
+
+#scoreBoard {
+  display:block;
+  position:absolute;
+  margin-bottom:10px;
+  width:40%;
+  top:55px
+}
+
+#score {
+  top:40px;
+  display:block;
+  position:relative;
+  left:0px;
+  color: white;
+  background:#0D8F68;
+  border-radius:25px;
+  padding-right:8px;
+  padding-left:8px;
+  font-size: 2em;
+  width:50px;
+  text-align:center;
+  z-index:1;
+}
+
+#scoreLabel {
+  color:#8F1D00;
+  display:block;
+  position:relative;
+  left:-35px;
+  top:38px;
+  font-size:1.5em;
+}
+
+#highLabel {
+  color:#8F1D00;
+  display:block;
+  position:relative;
+  left:calc(100% - 30px);
+  top:-86px;
+  font-size:1.5em;
+}
+
+#scoreLine {
+  width:100%;
+  border-bottom:1px solid #8F1D00;
+  
+}
+
+#maxScore {
+  top:-20px;
+  display:block;
+  position:relative;
+  left:100%;
+  color: white;
+  background:#2ADBA7;
+  border-radius:0px;
+  padding-right:8px;
+  font-size: 2em;
+  width:50px;
+  text-align:center;
+  cursor:pointer;
+  user-select: none;
+}
+
+#avg {
+  display:block;
+  position:relative;
+  top:20px;
+  left:24%;
+  color:lightgrey;
+}
+
+#avgScore {
+  display:none;
+  position:relative;
+  
+}
+
+#avgLabel {
+  display:block;
+  position:relative;
+  width:auto;
+  border-left:1px solid #8F1D00;
+  padding-left:4px;
+}
+
+@media only screen and (min-width: 768px) {
+  #cuts {
+    font-size: 2em;
+  }
+  #score {
+    font-size: 2em;
+  }
+  #maxSscore {
+    font-size: 2em;
+  }
+}
+
+#wordDisplay {
+  margin-left: auto;
+  margin-right: auto;
+  height: 100px;
+  padding-bottom: 2vh;
+  padding-top: 2vh;
+
+  /*
+  
+  -moz-box-shadow: inset -5px -5px 5px 5px #888;
+  -webkit-box-shadow: inset -5px -5px 5px 5px #888;
+  box-shadow: inset 0px 5px 5px 0px #888, inset 0px -5px 5px 0px #888;
+  
+  */
+}
+
+header {
+  color:#8F1D00;
+  font-family: 'Martian Mono', monospace;
+  font-size:24px;
+  border-bottom:1px solid lightgray;
+  padding:8px;
+  height:36px;
+}
+
+.letterBlock {
+  display: inline-block;
+  padding: 0px;
+  width: auto;
+  height: auto;
+  top: 0px;
+  overflow: visible;
+}
+
+.spinnerLetter {
+  display: inline-block;
+  font-family: monospace;
+  font-size: min(20vw, 80px);
+  border: 1px solid;
+  padding: 20px;
+  background-color: white;
+  cursor: ns-resize;
+  user-select: none;
+
+  overflow: visible;
+}
+
+@media only screen and (min-width: 768px) {
+  .spinnerLetter {
+    font-size: 40px;
+    padding: 12px;
+  }
+}
+
+.offset {
+  display: block;
+  position: relative;
+  font-size: 14pt;
+  visibility: hidden;
+}
+
+.offsetUp {
+  left: 12px;
+  top: -80px;
+}
+
+.offsetDown {
+  left: 2px;
+  top: 20px;
+}
+
+.btn {
+  border-radius: 25px;
+  border: 1px solid #bbbbbb;
+  font-size: 36px;
+  display: inline;
+  position: relative;
+  top: 0px;
+  padding: 14px;
+  margin:5px;
+  user-select: none;
+  cursor: pointer;
+  background-color:white;
+  color:#8F1D00;
+}
+
+.disabled {
+  color:lightgray !important;
+}
+
+.toggle {
+  background-color:yellow;
+}
+
+@media only screen and (min-width: 768px) {
+  .btn {
+    font-size: 24px;
+  }
+}
+
+.changed {
+  background-color: yellow !important;
+}
+
+.maxxed {
+  background-color: red !important;
+}
+
+#wordList {
+  font-family: 'Martian Mono', monospace;
+  display: block;
+  position: relative;
+  font-size: 24pt;
+  color: black;
+  width: auto;
+  min-width: 100px;
+  height: auto;
+  text-align: center;
+  padding: 10px;
+  margin-top:20px;
+}
+
+.firstWord {
+  color: #999999;
+}
+
+.gone {
+  display:none !important;
+}
+
+#name {
+  display:block;
+  position:absolute;
+  left:10px;
+  top:10px;
+}
+
+#helpButton {
+  display:block;
+  position:absolute;
+  right:10px;
+  top:10px;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+  cursor: pointer;
+}
+
+#yesterday {
+  display:block;
+  position:absolute;
+  right:100px;
+  top:10px;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+  cursor: pointer;
+}
+
+#yesterdayPanel {
+  display:block;
+  position:absolute;
+  background-color:#BA956A;
+  left:0px;
+  top:50px;
+  width:100%;
+  height:auto;
+  z-index:100;
+}
+
+#yesterdayScores {
+  font-family: 'Martian Mono', monospace;
+  font-size:30pt;
+  color:white;
+  padding:50px;
+  text-align:center;
+}
+
+#yesterdayClose {
+  display:block;
+  position:absolute;
+  right:10px;
+  top:10px;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+  cursor: pointer;
+}
+
+.ySeed {
+  padding:10px;
+  background-color:#E9983E;
+  width:auto;
+  margin-bottom:50px;
+}
+
+#help {
+  
+  display:block;
+  position:absolute;
+  width: 50%;
+  min-width:600px;
+  background-color:#bbc2da;
+  top:60px;
+  left:0px;
+  padding:30px;
+  font-size:22pt;
+  z-index:5;
+  overflow-y:scroll;
+}
+
+#help h2 {
+  font-family: 'Martian Mono', monospace;
+  font-size:30pt;
+}
+
+#help p {
+  font-size:26pt;
+  font-family: "Avenir", Helvetica, sans-serif;
+}
+
+#helpClose, #doneClose {
+  font-size:36pt;
+  display:block;
+  position:absolute;
+  right:10px;
+  top:10px;
+  cursor:pointer;
+  
+}
+
+
+#donePanel {
+  display:inline-block;
+  position:fixed;
+  top:20px;
+  left:20px;
+  width: 90%;
+  max-width:1200px;
+  background-color:#bbc2da;
+  padding:20px;
+  font-family: "Avenir", Helvetica, sans-serif;
+  font-size:18pt;
+  z-index:200;
+}
+
+#doneMsg {
+  padding-bottom:20px;
+}
+
+#doneControls {
+  padding-bottom:20px;
+  padding-top:40px;
+}
+
+legend {
+  background-color:white;
+}
+
+fieldset
+{
+  background-color:lightblue;
+  padding:16px;	
+  border:1px solid white;
+}
+
+fieldset .btn {
+  margin-top:25px;
+}
+
+#shareMsg {
+  color:black;
+  padding-top:50px;
+}
+
+
+
+@media only screen and (min-width: 768px) {
+  #help p {
+    font-size: 22px;
+  }
+  #help {
+    font-size: 22px;
+  }
+}
+
+/* The animation code */
+@keyframes tumble {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(2turn);
+  }
+}
+
+/* Tumbler CSS */
+.tumbler {
+  overscroll-behavior: contain;
+  display:inline-flex;
+  align-items: center;
+  flex-direction: column;
+  border:1px solid black;
+  overflow:hidden;
+  
+  background: linear-gradient(0deg, rgba(0,0,0,0.2) 0%, rgba(255,255,255,0.3) 16%, rgba(255,255,255,0.3) 87%, rgba(0,0,0,0.2) 100%);
+  background-color:white;
+  cursor: ns-resize;
+  width:auto;
+  
+}
+
+.tumblerBlock {
+  font-family: 'Martian Mono', monospace;
+  display:block;
+  position:relative;
+  width:auto;
+  height:30px;
+  margin-top:-15px;
+  color:black;
+}
+
+.focus {
+  border:3px red solid;
+}
+
+.enbiggen {
+  transform:scale(1.5);
+}
+
+#tumbleLabel {
+  color:#DC6C3D;
+  font-size:2em;
+  margin-top:50px;
+  margin-bottom:-20px;
+}
+
+.slug {
+  background-color:#E9983E;
+  padding-left:30px;
+  padding-right:30px;
+  border-radius:40px;
+  margin-top:-50px;
+  z-index:3;
+}
+
+@media only screen and (min-width: 768px) {
+  .slug {
+    font-size: 3.5em;
+    padding-top:40px;
+    margin-top:-90px !important;
+  }
+}
+
+.thick {
+  border-bottom:20px solid lightgrey !important;
+}
+
+#scoreBoard2 {
+  display:block;
+  position:relative;
+  width:75%;
+  height:40px;
+  background-color:grey;
+  border-radius:15px;
+  background:rgba(0,0,0,0.1);
+  margin-top:40px;
+  
+}
+
+#medianBack {
+  display:block;
+  position:absolute;
+  width:75%;
+  height:40px;
+  border-radius:15px;
+  background:rgba(0,0,0,0.05);
+  
+}
+@media only screen and (min-width: 768px) {
+  #scoreBoard2 {
+    margin-top:0px;
+    width:55%;
+  }
+  #wordDisplay {
+    padding-bottom:40px;
+  }
+}
+
+#scoreNew {
+  display:block;
+  position:absolute;
+  background:#0D8F68;
+  border-radius:25px;
+  color:white;
+  font-size:2.1em;
+  padding-right:8px;
+  padding-left:8px;
+  left:0%;
+}
+
+#maxWrap {
+  display:block;
+  position:absolute;
+  left:100%;
+  z-index:100;
+  user-select: none;
+}
+
+#maxScoreNew {
+  display:block;
+  position:absolute;
+  color:#2ADBA7;
+  border-radius:25px;
+  width:auto;
+  font-size:2.1em;
+  
+  padding-right:8px;
+  padding-left:8px;
+  cursor:pointer;
+  user-select: none;
+  
+}
+
+.btnNew {
+  border-radius: 25px;
+  font-size: 36px;
+  display: inline;
+  position: relative;
+  top: 0px;
+  padding: 14px;
+  margin:5px;
+  user-select: none;
+  cursor: pointer;
+  background-color:white;
+  color:#8F1D00;
+}
+
+#medianLabel {
+  display:block;
+  position:absolute;
+  left:100%;
+  padding-top:10px;
+  color:rgba(0,0,0,0.4);
+}
+
+#control {
+  padding-top:10px;
+}
+
+#highScoreLabel {
+  display:block;
+  position:absolute;
+  font-weight:bold;
+  size:1.6em;
+  right:10px;
+  padding-top:10px;
+  color:rgba(0,0,0,0.4);
+}
+
+
+.arrow {
+  border: solid #6AD8AA;
+  border-width: 0 4px 4px 0;
+  display: block;
+  padding: 3px;
+  width:5px;
+  height:5px;
+  opacity:0.3;
+  
+}
+
+.right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+
+.up {
+  
+  margin-left:20px;
+  margin-top:-10px;
+  margin-bottom:26px;
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+
+.down {
+  margin-left:20px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}

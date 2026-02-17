@@ -1,0 +1,284 @@
+<!--
+
+TumbleJumble
+Jer Thorp, Dec 6, 2022
+
+At some point in the future this code will be cleaned up to look like it were made by a respectable coder who know what they were doing it wrote it.
+
+This is not yet that point in the future.
+
+If you have inquiries about the game, please contact: jer.thorp@hey.com
+
+-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tumbleword</title>
+    <link
+      rel="icon"
+      href="https://cdn.glitch.global/fddfe4f6-ba40-4230-a637-350cbd5ad40f/favicon.ico"
+      type="image/x-icon"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="https://cdn.glitch.global/fddfe4f6-ba40-4230-a637-350cbd5ad40f/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="https://cdn.glitch.global/fddfe4f6-ba40-4230-a637-350cbd5ad40f/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="https://cdn.glitch.global/fddfe4f6-ba40-4230-a637-350cbd5ad40f/favicon-16x16.png"
+    />
+    <meta name="viewport" content="width=750, user-scalable=yes" />
+    <meta name="description" content="Tumbleword: A tumbling jumbling daily word game! Your goal is to score points by finding new words using 42 tumbles. Can you beat the high score? " />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@200&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+
+    <link rel="stylesheet" href="/shake.css" />
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.3.0/lib/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/addons/p5.dom.js"></script>
+    <script src="/spell.js"></script>
+    <script src="/wordlist.js"></script>
+    <script src="/sketch.js"></script>
+  </head>
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-3S6M14YG21"
+  ></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "G-3S6M14YG21");
+  </script>
+  <body>
+    <header>
+      <div id="name">tumbleword</div>
+      <div id="yesterday">
+        yesterday
+      </div>
+      <div id="helpButton">help</div>
+    </header>
+
+    <div id="wrap">
+      <div id="game">
+       <div id="wordWrap">
+         
+          <div id="scoreBoard" class="gone">
+            <div id="scoreLabel">your score</div>
+            <div id="score">0</div>
+            <div id="scoreLine" class="thick">
+              <div id="avg">
+                <div id="avgLabel">average 35</div>
+              </div>
+              
+            </div>
+            <div id="maxWrap1">
+              <div id="maxScore"></div>
+              <div>
+                <i class="arrow right"></i>
+                <i class="arrow left"></i>
+              </div>
+            </div>
+            
+
+            <div id="highLabel">🌍 high score</div>
+          </div>
+
+          <div id="tumbleLabel">tumbles</div>
+
+          <div id="stepWrap">
+            <div id="steps" class="fillWeed">42</div>
+          </div>
+
+          <div id="wordDisplay" class="slug"></div>
+         <div id="scoreBoard2">
+           <div id="medianBack" class="gone"></div>
+           <div id="medianLabel" class="gone">
+             ← avg
+             </div>
+           <div id="highScoreLabel">
+             good →
+             </div>
+           <div id="scoreNew">0</div>
+           <div id="maxWrap">
+              <div id="maxScoreNew"></div>
+              <div>
+                <i class="arrow up"></i>
+                <i class="arrow down"></i>
+              </div>
+            </div>
+         </div>
+          <div id="message"></div>
+          <div id="control">
+            <div id="reset" class="btnNew">rewind</div>
+            <div id="leftBump" class="btnNew">🤛</div>
+            <div id="done" class="btnNew gone">done!</div>
+            <div id="cuts" class="btnNew">
+              ✂️
+              <div id="badge" class="badge">3</div>
+            </div>
+            <div id="rightBump" class="btnNew">🤜</div>
+            <div id="enter" class="btnNew">enter</div>
+          </div>
+
+          <div id="wordList"></div>
+        </div>
+
+        <div id="bomb"></div>
+      </div>
+    </div>
+
+    <div id="help" class="gone">
+      <div id="helpClose">✕</div>
+      <h2>How to Play</h2>
+
+      <p>
+        <strong>
+        Your goal is to score points by finding new words using 42
+        tumbles.
+        </strong>
+      </p>
+
+      <p>
+        Click and drag the letters up or down to tumble them and find new words.
+      </p>
+
+      <p>
+        Each letter you shift costs one of your 42 tumbles. You can keep
+        counting words until you run out of tumbles. You can tumble more than
+        one letter at once!
+      </p>
+      <p>
+        For example, changing <strong>word</strong> to
+        <strong>worm</strong> will cost you 10 tumbles because
+        <strong>m</strong> is 10 letters from <strong>d</strong>.
+      </p>
+      <p></p>
+      <img
+        src="https://cdn.glitch.global/fddfe4f6-ba40-4230-a637-350cbd5ad40f/WordWorm.gif?v=1670611810665"
+      />
+      <p>
+        Changing <strong>worm</strong> to <strong>warm</strong> will cost you 12
+        tumbles because <strong>a</strong> is 12 letters from
+        <strong>o</strong>.
+      </p>
+      <img
+        src="https://cdn.glitch.global/fddfe4f6-ba40-4230-a637-350cbd5ad40f/WormWarm.gif?v=1670611810331"
+      />
+      <p>
+        You can use the bump buttons (🤛 and 🤜) to shift every letter to the
+        right or to the left.
+      </p>
+      <img
+        src="https://cdn.glitch.global/fddfe4f6-ba40-4230-a637-350cbd5ad40f/CaviarAviary.gif?v=1670710430542"
+      />
+
+      <p>
+        Press the <strong>enter</strong> button to count words and add to your
+        score.
+      </p>
+      <p>
+        Press the <strong>reset</strong> button to return to the last word you
+        counted and restore your tumbles.
+      </p>
+
+      <p></p>
+
+      <p>
+        You can use ✂️ to trim letters from the word: each ✂️ costs 3 tumbles.
+      </p>
+
+      <p>Keyboard controls: ← ↑ → ↓ and ENTER.</p>
+      <p>
+        Love the game? Hate the game?
+        <a href="mailto:jer.thorp@hey.com">Let me know. </a>
+      </p>
+      <p></p>
+    </div>
+
+    <div id="doneWrap">
+      <div id="donePanel" class="gone">
+        <div id="doneClose">✕</div>
+        <div id="doneMsg">
+          <h2>Great job!</h2>
+          <p id="done1">
+            You went from <strong>score</strong> to <strong>job</strong> in 8
+            steps, using 41 tumbles.
+          </p>
+          <p id="done2">
+            You score 42 points, just 6 points short of the high score.
+          </p>
+          <p id="done3">You used 1 ✂️ and 2 🤜🤛.</p>
+        </div>
+        <p id="done4">
+          👉 <em>Come back tomorrow to see how the high score was achieved!</em>
+        </p>
+        <fieldset>
+          <legend>
+            Sharing your score will help other Tumbleword players to see how
+            well they played.
+          </legend>
+
+          <div>
+            <input type="checkbox" id="logOK" name="log" checked />
+            <label for="scales"
+              >I'm OK with logging my score (we won't store ANY other
+              information about you)</label
+            >
+          </div>
+
+          <div>
+            <input type="checkbox" id="isHuman" name="human" checked />
+            <label for="horns"
+              >I am a human (uncheck this if you used a script or a wordlist to
+              play)</label
+            >
+          </div>
+        </fieldset>
+
+        <div id="doneControls">
+          <div id="doneOK" class="btn">OK, submit my score!</div>
+          <div id="doneShare" class="btn gone">share</div>
+          <div id="doneChallenge" class="btn gone">challenge</div>
+          <div id="shareMsg"></div>
+        </div>
+      </div>
+    </div>
+    
+    <div id="yesterdayPanel" class="gone">
+      <div id="yesterdayClose">✕</div>
+      <div id="yesterdayScores">
+        <pre>
+        </pre>
+
+      </div>
+      
+    </div>
+
+    <!--div
+      class="glitchButton"
+      style="position: fixed; top: 20px; right: 20px"
+    ></div-->
+    <!--script
+      src="https://button.glitch.me/button.js"
+      data-style="glitch"
+    ></script-->
+  </body>
+</html>
