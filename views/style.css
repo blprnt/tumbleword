@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Martian+Mono:wght@200&display=swap');
+@import url('/fonts.css');
 
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 
@@ -416,7 +416,7 @@ BEGIN GAME CODE
   margin-top:5px;
   margin-bottom:40px;
   text-align:center;
-  background-image: url("https://cdn.glitch.global/fddfe4f6-ba40-4230-a637-350cbd5ad40f/tumbleweed_simple.svg?v=1670603043635");
+  background-image: url("/img/tumbleweed_simple.svg");
   background-repeat: no-repeat;
   background-size: auto;
   background-position:center;
@@ -424,7 +424,7 @@ BEGIN GAME CODE
 
 .fillWeed {
   color:white !important;
-  background-image: url("https://cdn.glitch.global/fddfe4f6-ba40-4230-a637-350cbd5ad40f/tumbleweed_fill.svg?v=1670963018347") !important;
+  background-image: url("/img/tumbleweed_fill.svg") !important;
 }
 
 .rotate {

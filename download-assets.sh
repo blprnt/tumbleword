@@ -18,6 +18,10 @@ curl -sL "https://cdn.glitch.global/fddfe4f6-ba40-4230-a637-350cbd5ad40f/WordWor
 curl -sL "https://cdn.glitch.global/fddfe4f6-ba40-4230-a637-350cbd5ad40f/WormWarm.gif?v=1670611810331" -o "$VIEWS/img/WormWarm.gif"
 curl -sL "https://cdn.glitch.global/fddfe4f6-ba40-4230-a637-350cbd5ad40f/CaviarAviary.gif?v=1670710430542" -o "$VIEWS/img/CaviarAviary.gif"
 
+echo "Downloading tumbleweed SVGs..."
+curl -sL "https://cdn.glitch.global/fddfe4f6-ba40-4230-a637-350cbd5ad40f/tumbleweed_simple.svg?v=1670603043635" -o "$VIEWS/img/tumbleweed_simple.svg"
+curl -sL "https://cdn.glitch.global/fddfe4f6-ba40-4230-a637-350cbd5ad40f/tumbleweed_fill.svg?v=1670963018347" -o "$VIEWS/img/tumbleweed_fill.svg"
+
 echo "Downloading p5.js libraries..."
 curl -sL "https://cdn.jsdelivr.net/npm/p5@1.3.0/lib/p5.js" -o "$VIEWS/p5.js"
 curl -sL "https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/addons/p5.dom.js" -o "$VIEWS/p5.dom.js"
