@@ -9,7 +9,7 @@ const words = fs
   .readFileSync(path.join(__dirname, "../views/wordlist_en.txt"), "utf8")
   .split("\n")
   .map((w) => w.trim().toLowerCase())
-  .filter((w) => w.length === 5 && /^[a-z]+$/.test(w) && !/(.)\1/.test(w));
+  .filter((w) => w.length === 5 && /^[a-z]+$/.test(w) && !/(.)\1/.test(w) && !w.endsWith("s"));
 
 // Deterministic Fisher-Yates shuffle with a fixed seed (mulberry32 PRNG).
 // Using a fixed seed keeps the order consistent across regenerations.
