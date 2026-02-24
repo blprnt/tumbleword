@@ -1,15 +1,33 @@
 // Run once from project root: node scripts/generate-daily-words.js
 // Filters wordlist_en.txt to 5-letter alphabetic words (no doubles) for use as daily seed words.
+// Only keeps words that have at least one valid one-letter-away neighbor, so players always
+// have an easy first move.
 // The list is shuffled with a fixed seed so consecutive days don't produce alphabetically adjacent words.
 
 const fs = require("fs");
 const path = require("path");
 
-const words = fs
-  .readFileSync(path.join(__dirname, "../views/wordlist_en.txt"), "utf8")
-  .split("\n")
-  .map((w) => w.trim().toLowerCase())
-  .filter((w) => w.length === 5 && /^[a-z]+$/.test(w) && !/(.)\1/.test(w) && !w.endsWith("s"));
+const allFiveLetterWords = new Set(
+  fs
+    .readFileSync(path.join(__dirname, "../views/wordlist_en.txt"), "utf8")
+    .split("\n")
+    .map((w) => w.trim().toLowerCase())
+    .filter((w) => w.length === 5 && /^[a-z]+$/.test(w))
+);
+
+function hasOneLetterNeighbor(word) {
+  for (let i = 0; i < word.length; i++) {
+    for (let c = 97; c <= 122; c++) {
+      const ch = String.fromCharCode(c);
+      if (ch === word[i]) continue;
+      if (allFiveLetterWords.has(word.slice(0, i) + ch + word.slice(i + 1))) return true;
+    }
+  }
+  return false;
+}
+
+const words = [...allFiveLetterWords]
+  .filter((w) => !/(.)\1/.test(w) && !w.endsWith("s") && hasOneLetterNeighbor(w));
 
 // Deterministic Fisher-Yates shuffle with a fixed seed (mulberry32 PRNG).
 // Using a fixed seed keeps the order consistent across regenerations.
