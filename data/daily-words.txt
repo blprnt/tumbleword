@@ -1612,7 +1612,7 @@ peach
 irade
 chirm
 mucid
-pager
+sough
 redan
 oxter
 stunt
@@ -2451,7 +2451,7 @@ ither
 beton
 drain
 resid
-sough
+pager
 hydra
 dazed
 pacha
